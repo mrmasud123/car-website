@@ -1,0 +1,536 @@
+/* common css */
+/* ====================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,500&display=swap');
+
+    /* background: linear-gradient(90deg, rgba(203, 203, 216, 1) 0%, rgba(155, 237, 254, 1) 100%) !important;*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+a,
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/**/
+
+
+/* Admin csss */
+#wrapper a{
+    display: flex;
+}
+
+.left-container {
+    background: black;
+    color: white;
+    transition: all 1s;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+
+#wrapper nav i{font-size: 25px;height: 35px;width: 35px;}
+
+.left-container {
+    width:19vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+}
+.right-container {
+    transition: all 1s;
+    width:80vw;
+}
+.nav-icon {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon i {
+    cursor: pointer;
+}
+
+.sh{
+    transition: all 1s;
+    width:5vw;
+}
+
+.link-sh{
+    display:none;
+}
+.nsh{
+    transition: all 1s;
+    width:19vw;
+}
+.nlink-sh{
+    display:block;
+    
+}
+
+.rightsh{
+    transition: all 1s;
+    width: 95vw !important;
+}
+.dashboard-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.content {
+   /*  flex-grow: 1; */
+    /* background: yellow; */
+    margin: 10px;
+    line-height: 45px;
+    position: relative;
+    border-radius: 10px;
+}
+
+.content a.nav-item {
+    align-items: center;
+    justify-content: center;
+    background: #f5d913;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.content i.fa.fa-users ,.content i.fa.fa-medkit ,.content i.fa.fa-building ,.content i.fa.fa-user {
+    font-size: 60px;
+    margin-right: 25px;
+    opacity: 0.2;
+    transition: all 1s;
+}
+
+.content {
+    padding: 18px 0 0 0px;
+}
+.dashboard-container .content:nth-child(2) {
+    background: #A0E711;
+}
+
+.dashboard-container .content:nth-child(2) a {
+    background: #96cd27;
+}
+
+.dashboard-container .content:nth-child(3) {
+    background: #e18cc1;
+}
+
+.dashboard-container .content:nth-child(3) a {
+    background: #df7eba;
+}
+
+.dashboard-container .content:nth-child(4) a {
+    background: #e9664e;
+}
+.dashboard-container .content:nth-child(5) {
+    background: rgb(129, 226, 210);
+}
+.dashboard-container .content:nth-child(4) {
+    background: tomato;
+}
+.dashboard-container .content:nth-child(6) {
+    background: #f39b61;
+}
+
+.dashboard-container .content:nth-child(7) {
+    background: #7d9df3;
+}
+.dashboard-container .content i{
+    margin-left:10px;
+}
+.dashboard-container .content a{
+    color:black
+}
+
+.content:hover i{
+    transition: all 1s;
+    transform:scale(1.3);
+}
+body {
+    background: #00000012;
+}
+
+.admin-header.d-flex.align-items-center.justify-content-between.p-2.border-bottom {
+    background: white;
+}
+table {
+    width: 100%;
+}
+
+table tbody tr td img {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+}
+
+table {
+    text-align: center;
+}
+
+.modal-header i {
+    width: 40px;
+    height: 40px;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 1s;
+}
+.modal-header i:hover{
+    color:black;
+    transition: all 1s;
+}
+section#loginmodal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000000e0;
+    z-index: 100;
+}
+#passChangemodal,#req_modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000000e0;
+    z-index: 100;
+}
+.modal-container {
+    width: 30%;
+    background: #000000ad;
+    padding: 25px;
+    line-height: 28px;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    box-shadow: 0px 0px 24px -12px white;
+    border-radius: 10px;
+    color: white;
+}
+.pass-chng-modal-container{
+    width: 30%;
+    background: #000000ad;
+    padding: 25px;
+    line-height: 28px;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    box-shadow: 0px 0px 24px -12px white;
+    border-radius: 10px;
+    color: white;
+}
+#loginmodal,#req_modal{
+    display:none;
+}
+#passChangemodal{
+    display:none;
+}
+/* Admin login page css */
+.input-group-text {
+    background: white;
+    border-left: 0;
+    padding: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+input.form-control.email,
+input.form-control.password {
+    border-right: 0;
+}
+
+body.d-flex.align-items-center.justify-content-center {
+    background: linear-gradient(76deg, #00000070, #dc3545);
+}
+
+.form-container.position-relative {
+    box-shadow: 0px 0px 18px -1px #212529;
+}
+
+.form-container.position-relative h5 {
+    position: absolute;
+    top: 66%;
+    z-index: 1;
+    font-family: math;
+    font-size: 20px;
+    padding: 4px 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: auto;
+    left: -100%;
+transition:all 0.5s;
+}
+.form-container.position-relative {
+overflow: hidden;
+}
+h5#alert-msg {
+    width: 200px;
+    text-align: center;
+    font-size: 16;
+    color: white;
+}
+.show-msg{
+    left:0% !important;
+    transition:0.5s !important;
+}
+
+/* Admin dashboard header css */
+.btn-group {
+    z-index: 0;
+    left: -100%;
+    transition: all 0.5s;
+}
+
+button.btn.btn-warning {
+    z-index: 1;
+    position: relative;
+}
+
+.admin-btn-container {
+    overflow-y: hidden;
+}
+.slide-btn-group{
+    transition: all 0.5s;
+    left:0;
+}
+input.form-control.image {
+    position: relative;
+}
+
+input.form-control.image:before {
+    position: absolute;
+    content: '*Optional';
+    color: red;
+    right: 0;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+}
+/* profile page */
+#profilePage table tr th:nth-child(1){
+    width:160px;
+}
+
+.left-container nav ul{
+    width:100%;
+}
+.left-container nav ul li{
+    margin-bottom: 5px;
+}
+.active{
+    background-color: green;
+    border-radius: 10px;
+}
+
+/* Registration */
+#reg-head img {
+    width: 100px;
+    height: 60px;
+}
+
+/* emplooyeee */
+
+i{
+    cursor: pointer;
+}
+i.fa.fa-minus.fs-1.position-absolute{
+    top:0;
+    visibility: hidden;
+    left:0;
+}
+.specs__content__details {
+    background: wheat; 
+    display: none;
+    overflow: hidden;
+    color:black;
+    transition:all 0.5s;
+}
+.employee__container {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.specs__container {
+    width: 90%;
+}
+/* VIew sold carsd */
+#phone::before{
+    position:absolute;
+    top:0;
+    left:0;
+    color:white;
+    content:"+880";
+    background: #0000008c;
+    width:50px;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#phone input {
+    padding-left: 60px;
+}
+section#test-drive-form {
+    visibility: hidden;
+    transition: all 1s;
+    z-index: 1001;
+    opacity:0;
+    position: fixed;
+    background: #6b67678a;
+    width: 100%;
+    height: 100vh;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+   
+}
+
+.drive-form-container.p-3{
+    background: #1b242d;
+    border-radius: 10px;
+    transition: all 1s;
+}
+.drive-form-container.p-3{
+    width: 80%;
+    position:absolute;
+    transform: translate(-50%,-50%);
+    top: -100%;
+    width: 100%;
+    left: 50%;
+}
+
+.showroom-content {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+.showroom-content h5{
+    font-family: math;
+}
+.showroom-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-showroom.p-3 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+}
+.showroom-content:before {
+    position: absolute;
+    content: "";
+    background: linear-gradient(179deg, rgb(226 35 35 / 42%), rgb(53 88 144 / 88%));
+    width: 100%;
+    height: 100%;
+}
+
+/* single car */
+.car-table img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit:contain;
+}
+
+.car_img{
+    width: 150px;
+    height: 100px;
+    
+}
+
+.available-cars,.employee_details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 5px;
+}
+.emp_img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.emp_img img {border-radius: 50%;}
+
+/* Car specification */
+.form-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    grid-gap: 20px;
+}
+
+/* news section */
+.thumbnail img {
+    width: 150px !important;
+    height: 70 !important;
+    object-fit: contain;
+    border-radius: 0 !important;
+}
+
+.news-form {
+    width: 70%;
+}
+
+/* edit employee */
+.prev-photo {
+    width: 100px;
+    height: 100px;
+}
+
+.prev-photo img {
+    width: 100%;
+}
+
+/* Add showroom */
+.showroom-item-container {
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    place-items: stretch;
+}
+
+/* Admin add section */
+.edit-admin-form{
+    width:50% !important;
+}
