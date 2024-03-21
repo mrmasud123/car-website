@@ -74,10 +74,6 @@ if(isset($_POST['addEmployee'])){
                     $DB->select("employee","*",null,"email='$emp_email' OR phone='$emp_phone'");
                     $emp_data=$DB->getResult();
                     if(count($emp_data)>=1){
-                        // $emp_data_check=$DB->getResult();
-                        // echo count($emp_data);
-                        // print_r($emp_data);
-                        // die();
                         if($emp_data[0]['email']==$emp_email){
                             echo json_encode(array('error'=>"E-mail  exists"));
                             exit;
@@ -138,6 +134,11 @@ if(isset($_POST['addEmployee'])){
     
 }
 
+//Add Car
+if(isset($_POST['addCar'])){
+    print_r($_POST);
+    print_r($_FILES);
+}
 
 
 

@@ -74,101 +74,22 @@ $(document).ready(function () {
     $(".drive-form-container").css({ 'transition': "all 1s", 'top': "50%" });
   });
 
-  //input box append
-  let ext_cnt = 0;
-  $(".add_ext_box").on("click", function (e) {
+  
+  function appendBox(e,attrname,cnt) {
+      if(attrname=="disp_img" || attrname=="exterrior_img" || attrname=="interrior_img"){
+        $(e.currentTarget).siblings().eq(0).append(`<input type="file" name="${attrname+"_"+cnt}" class="mb-2 form-control ${attrname}">`);
+      }else{
+        $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="${attrname+"_"+cnt}" class="mb-2 form-control ${attrname}">`);
+      }
+  }
+  var cnt=0;
+  $(".add_box").on('click',function(e){
     e.preventDefault();
-    ext_cnt++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Exterrior features ${ext_cnt + 1}" class="mb-2 form-control extbox${ext_cnt}">`);
-
-    console.log("Append")
-  });
-
-  let int_cnt = 0;
-  $(".add_int_box").on("click", function (e) {
-    e.preventDefault();
-    int_cnt++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Interrior features ${int_cnt + 1}" class="mb-2 form-control intbox${int_cnt}">`);
-
-    console.log("Append")
-  });
-
-  let am_cnt = 0;
-  $(".add_am_box").on("click", function (e) {
-    e.preventDefault();
-    am_cnt++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Audio/Multimedia features ${am_cnt + 1}" class="mb-2 form-control ambox${am_cnt}">`);
-
-    console.log("Append")
-  });
-
-  let safety_cnt = 0;
-  $(".add_safety_box").on("click", function (e) {
-    e.preventDefault();
-    safety_cnt++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Safety and Convenience features ${safety_cnt + 1}" class="mb-2 form-control safetybox${safety_cnt}">`);
-
-    console.log("Append")
-  });
-
-  let car_cnt = 0;
-  $(".add_car_box").on("click", function (e) {
-    e.preventDefault();
-    car_cnt++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Car name" class="mb-2 form-control carbox${car_cnt}"> <input type="number" name="car_name" placeholder="Car Quantity" class="mb-2 form-control carqty${car_cnt}">`);
-
-    console.log("Append")
-  });
-
-  let salesman = 0;
-  $(".add_salesman_box").on("click", function (e) {
-    e.preventDefault();
-    salesman++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Salesman Name" class="mb-2 form-control salesmanbox${salesman}">`);
-
-    console.log("Append")
-  });
-
-  let mechanic = 0;
-  $(".add_mechanic_box").on("click", function (e) {
-    e.preventDefault();
-    salesman++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="text" name="car_name" placeholder="Salesman Name" class="mb-2 form-control mechanicbox${mechanic}">`);
-    
-    console.log("Append")
-  });
-
-  let display_img = 0;
-  $(".add_disp_img_box").on("click", function (e) {
-    e.preventDefault();
-    display_img++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="file" name="car_name" class="mb-2 form-control displayimg${display_img}">`);
-    
-    console.log("Append")
-  });
-
-  let ext_img = 0;
-  $(".add_ext_img_box").on("click", function (e) {
-    e.preventDefault();
-    ext_img++;
-    $(e.currentTarget).siblings().eq(0).append(`<input type="file" name="car_name" class="mb-2 form-control extimg${ext_img}">`);
-    
-    console.log("Append")
-  });
-  $(".add_int_img_box").on("click", function (e) {
-    e.preventDefault();
+    cnt++;
     var attrname=$(this).attr('data-name');
-      console.log()
-      $(e.currentTarget).siblings().eq(0).append(`<input type="file" name="car_name" class="mb-2 form-control ${attrname +"_"+ext_img}">`);
-    });
-  // let int_img = 0;
-  // $(".add_int_img_box").on("click", function (e) {
-  //   e.preventDefault();
-  //   int_img++;
-  //   $(e.currentTarget).siblings().eq(0).append(`<input type="file" name="car_name" class="mb-2 form-control intimg${int_img}">`);
-  //   mechanic
-  //   console.log("Append")
-  // });
+    appendBox(e,attrname,cnt);
+  });
+  
   /* Edit admin section code */
   $("#form-close").on('click', function (e) {
     $(".drive-form-container").fadeOut(2000);
@@ -268,4 +189,13 @@ $(document).ready(function () {
     submitForm(formData, "#AddEmpForm", "Employee Added", "employee.php");
   });
 
+  //Add car
+  $("#specs_form").on('submit', function(e){
+    e.preventDefault();
+    $(document).scrollTop(0);
+    var formData = new FormData(this);
+    console.log(formData)
+    // formData.append('addCar', 1);
+    // submitForm(formData, "#specs_form", "Car Added", "models.php");
+  });
 });
