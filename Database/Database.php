@@ -54,7 +54,6 @@
 
         public function update($table,$param=array(),$where=null){
             if($this->tableExists($table)){
-                //print_r($param);
                 foreach($param as $key=>$pa){
                     $args[]=$key."='".$pa."'";
                 }
@@ -106,6 +105,9 @@
                 }
                 if($order != null){
                     $sql .= ' ORDER BY '.$order;
+                }
+                if($limit != null){
+                    $sql .= ' LIMIT '.$limit;
                 }
 
                 

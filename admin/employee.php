@@ -1,20 +1,75 @@
-<?php include 'partials/header.inc.php'; ?>
+<?php
+include 'partials/header.inc.php';
+$DB->sql("SELECT * from employee");
+$data = $DB->getResult();
+
+function filterByDesignation($data, $designation)
+{
+    $filteredArray = [];
+    foreach ($data as $item) {
+        if ($item['designation'] === $designation) {
+            $filteredArray[] = $item;
+        }
+    }
+    return $filteredArray;
+}
+
+// Filtered arrays for each designation
+$managers = filterByDesignation($data[0], 'manager');
+$accountants = filterByDesignation($data[0], 'accountant');
+$salesmen = filterByDesignation($data[0], 'salesman');
+$mechanics = filterByDesignation($data[0], 'mechanic');
+
+function printTableRow($data)
+{
+    foreach ($data as $dt) {
+        if (!empty($dt['assigned_branch_id'])) {
+            $con = mysqli_connect("localhost", "root", "", "cardb");
+            $bid = $dt['assigned_branch_id'];
+
+            $run_sql = mysqli_query($con, "SELECT branch_name from branches where branch_id=$bid");
+            $bdata = mysqli_fetch_assoc($run_sql);
+            $br_name = $bdata['branch_name'];
+            $flag="";
+        } else {
+            $flag="bg-danger";
+            $br_name = "<span class='badge bg-warning'>Not Assigned</span>";
+        }
+        echo "<tr class='$flag'>";
+        echo "<td>" . $dt['id'] . "</td>";
+        echo "<td class='text-capitalize'>" . $dt['name'] . "</td>";
+        echo "<td class='text-lowercase'>" . $dt['email'] . "</td>";
+        echo "<td>" . $dt['phone'] . "</td>";
+        echo "<td>".$br_name."</td>";
+        echo "<td>" . $dt['join_date'] . "</td>";
+        echo "<td>";
+        if ($dt['salary_status']) {
+            echo '<span class="badge bg-success">Paid</span>';
+        } else {
+            echo '<span class="badge bg-primary">Pending</span>';
+        }
+        echo "</td>";
+        echo "<td>";
+        if (empty($dt['img'])) {
+            echo "Not found";
+        } else {
+            echo "<img src='../images/employee_img/" . $dt['img'] . "'>";
+        }
+        echo "</td>";
+        echo "<td class='d-flex align-items-center justify-content-center'>";
+        echo "<a href='edit-employee.php?eid=" . $dt['id'] . "' class='btn btn-primary bg-success btn-sm'>Edit?</a>";
+        echo "||";
+        echo "<button data-eid='" . $dt['id'] . "' class='btn btn-primary bg-danger btn-sm'>Delete?</button>";
+        echo "</td>";
+        echo "</tr>";
+    }
+}
+
+
+?>
 
 <div class="dashboard-content mt-5 px-2">
     <div class="employee__container">
-        <div class="car-list-header w-25 text-center mb-5 d-flex align-items-center flex-column">
-            <img src="../images/car-logo.png" alt="" class="car__image mb-3 w-50">
-            <form action="">
-                <div class="form-group">
-                    <select name="" id="" class="form-control">
-                        <option value="">Choose Showroom</option>
-                        <option value="">Model A</option>
-                        <option value="">Model B</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-        <!-- employee section starts -->
 
         <a href="add-employee.php" class="btn btn-primary btn-sm">Add Employee?</a>
 
@@ -27,72 +82,33 @@
                         <i class="collapse_btn fa fa-minus fs-1 position-absolute"></i>
                     </div>
                 </div>
-                <div class="specs__content__details rounded">
+                <div class="specs__content__details rounded mt-2">
                     <div class="p-3">
-                        <table class="table table-bordered">
-                            <thead>
+                        <div class="assigned_manager">
+                            <table class="table table-bordered table-striped border-dark table-hover">
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>E-mail</th>
                                     <th>Phone</th>
                                     <th>Branch</th>
-                                    <th>Designation</th>
                                     <th>Join Date</th>
                                     <th>Salary status</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $DB->select("employee", "*", null, "designation='manager'");
-                                $manager_data = $DB->getResult();
-                                if(count($manager_data)>0){
-
-                                    foreach ($manager_data as $m_data) {
-                                
+                                <tbody>
+                                    <?php 
+                                        printTableRow($managers);
                                     ?>
-                                    <tr>
-                                        <td><?php echo $m_data['id'] ?></td>
-                                        <td class="text-capitalize"><?php echo $m_data['name'] ?></td>
-                                        <td class="text-lowercase"><?php echo $m_data['email'] ?></td>
-                                        <td><?php echo $m_data['phone'] ?></td>
-                                        <td><?php echo $m_data['branch'] ?></td>
-                                        <td><?php echo $m_data['designation'] ?></td>
-                                        <td><?php echo $m_data['join_date'] ?></td>
-                                        <td>
-                                            <?php  
-                                                if($m_data['salary_status']){
-                                                    echo '<span class="badge bg-success">Paid</span>';
-                                                }else{
-                                                    echo '<span class="badge bg-danger">Pending</span>';
-                                                }
-                                            ?>
-                                            
-                                        </th>
-                                        <td><?php echo $m_data['img'] ?></td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a href="edit-employee.php?eid=<?php echo $m_data['id'] ?>" class="btn btn-primary bg-success btn-sm">Edit?</a>
-                                            ||
-                                            <button data-eid="<?php echo $m_data['id'] ?>" class="btn btn-primary bg-danger btn-sm">Delete?</button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }else{
-                                echo "<tr ><td colspan='10' align='center' >No data found</td></tr>";
-                            }
-                        
-                                ?>
+                                </tbody>
+                            </table>
+                        </div>
 
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-
+            <!-- Accountant -->
             <div class="specs__content mb-5">
                 <div class="specs__content__header d-flex align-items-center justify-content-between">
                     <h1>Accountant</h1>
@@ -101,72 +117,33 @@
                         <i class="collapse_btn fa fa-minus fs-1 position-absolute"></i>
                     </div>
                 </div>
-                <div class="specs__content__details rounded">
+                <div class="specs__content__details rounded mt-2">
                     <div class="p-3">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
+                        <div class="assigned_manager">
+                        <table class="table table-bordered table-striped border-dark table-hover">
+                                <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>E-mail</th>
                                     <th>Phone</th>
                                     <th>Branch</th>
-                                    <th>Designation</th>
                                     <th>Join Date</th>
                                     <th>Salary status</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $DB->select("employee", "*", null, "designation='accountant'");
-                                $accountant_data = $DB->getResult();
-                                if(count($accountant_data)>0){
-
-                                    foreach ($accountant_data as $acc_data) {
-                                
+                                <tbody>
+                                    <?php 
+                                        printTableRow($accountants);
                                     ?>
-                                    <tr>
-                                        <td><?php echo $acc_data['id'] ?></td>
-                                        <td class="text-capitalize"><?php echo $acc_data['name'] ?></td>
-                                        <td class="text-lowercase"><?php echo $acc_data['email'] ?></td>
-                                        <td><?php echo $acc_data['phone'] ?></td>
-                                        <td><?php echo $acc_data['branch'] ?></td>
-                                        <td><?php echo $acc_data['designation'] ?></td>
-                                        <td><?php echo $acc_data['join_date'] ?></td>
-                                        <td>
-                                            <?php  
-                                                if($acc_data['salary_status']){
-                                                    echo '<span class="badge bg-success">Paid</span>';
-                                                }else{
-                                                    echo '<span class="badge bg-danger">Pending</span>';
-                                                }
-                                            ?>
-                                            
-                                        </th>
-                                        <td><?php echo $acc_data['img'] ?></td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a href="edit-employee.php?eid=<?php echo $acc_data['id'] ?>" class="btn btn-primary bg-success btn-sm">Edit?</a>
-                                            ||
-                                            <button data-eid="<?php echo $acc_data['id'] ?>" class="btn btn-primary bg-danger btn-sm">Delete?</button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }else{
-                                echo "<tr ><td colspan='10' align='center' >No data found</td></tr>";
-                            }
-                        
-                                ?>
+                                </tbody>
+                            </table>
+                        </div>
 
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-
+            <!-- Salesman -->
             <div class="specs__content mb-5">
                 <div class="specs__content__header d-flex align-items-center justify-content-between">
                     <h1>Salesman</h1>
@@ -175,72 +152,33 @@
                         <i class="collapse_btn fa fa-minus fs-1 position-absolute"></i>
                     </div>
                 </div>
-                <div class="specs__content__details rounded">
+                <div class="specs__content__details rounded mt-2">
                     <div class="p-3">
-                    <table class="table table-bordered">
-                            <thead>
-                            <tr>
+                        <div class="assigned_manager">
+                        <table class="table table-bordered table-striped border-dark table-hover">
+                                <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>E-mail</th>
                                     <th>Phone</th>
                                     <th>Branch</th>
-                                    <th>Designation</th>
                                     <th>Join Date</th>
                                     <th>Salary status</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $DB->select("employee", "*", null, "designation='salesman'");
-                                $salesman_data = $DB->getResult();
-                                if(count($salesman_data)>0){
-
-                                    foreach ($salesman_data as $s_data) {
-                                
+                                <tbody>
+                                    <?php 
+                                        printTableRow($salesmen);
                                     ?>
-                                    <tr>
-                                        <td><?php echo $s_data['id'] ?></td>
-                                        <td class="text-capitalize"><?php echo $s_data['name'] ?></td>
-                                        <td class="text-lowercase"><?php echo $s_data['email'] ?></td>
-                                        <td><?php echo $s_data['phone'] ?></td>
-                                        <td><?php echo $s_data['branch'] ?></td>
-                                        <td><?php echo $s_data['designation'] ?></td>
-                                        <td><?php echo $s_data['join_date'] ?></td>
-                                        <td>
-                                            <?php  
-                                                if($s_data['salary_status']){
-                                                    echo '<span class="badge bg-success">Paid</span>';
-                                                }else{
-                                                    echo '<span class="badge bg-danger">Pending</span>';
-                                                }
-                                            ?>
-                                            
-                                        </th>
-                                        <td><?php echo $s_data['img'] ?></td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a href="edit-employee.php?eid=<?php echo $s_data['id'] ?>" class="btn btn-primary bg-success btn-sm">Edit?</a>
-                                            ||
-                                            <button data-eid="<?php echo $s_data['id'] ?>" class="btn btn-primary bg-danger btn-sm">Delete?</button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }else{
-                                echo "<tr ><td colspan='10' align='center' >No data found</td></tr>";
-                            }
-                        
-                                ?>
+                                </tbody>
+                            </table>
+                        </div>
 
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-
+            <!-- Mechanic -->
             <div class="specs__content mb-5">
                 <div class="specs__content__header d-flex align-items-center justify-content-between">
                     <h1>Mechanic</h1>
@@ -249,75 +187,32 @@
                         <i class="collapse_btn fa fa-minus fs-1 position-absolute"></i>
                     </div>
                 </div>
-                <div class="specs__content__details rounded">
+                <div class="specs__content__details rounded mt-2">
                     <div class="p-3">
-                    <table class="table table-bordered">
-                            <thead>
-                            <tr>
+                        <div class="assigned_manager">
+                        <table class="table table-bordered table-striped border-dark table-hover">
+                                <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>E-mail</th>
                                     <th>Phone</th>
                                     <th>Branch</th>
-                                    <th>Designation</th>
                                     <th>Join Date</th>
                                     <th>Salary status</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $DB->select("employee", "*", null, "designation='mechanic'");
-                                $mechanic_d = $DB->getResult();
-                                if(count($mechanic_d)>0){
-
-                                    foreach ($mechanic_d as $mechanic_data) {
-                                
+                                <tbody>
+                                    <?php 
+                                        printTableRow($mechanics);
                                     ?>
-                                    <tr>
-                                        <td><?php echo $mechanic_data['id'] ?></td>
-                                        <td class="text-capitalize"><?php echo $mechanic_data['name'] ?></td>
-                                        <td class="text-lowercase"><?php echo $mechanic_data['email'] ?></td>
-                                        <td><?php echo $mechanic_data['phone'] ?></td>
-                                        <td><?php echo $mechanic_data['branch'] ?></td>
-                                        <td><?php echo $mechanic_data['designation'] ?></td>
-                                        <td><?php echo $mechanic_data['join_date'] ?></td>
-                                        <td>
-                                            <?php  
-                                                if($mechanic_data['salary_status']){
-                                                    echo '<span class="badge bg-success">Paid</span>';
-                                                }else{
-                                                    echo '<span class="badge bg-danger">Pending</span>';
-                                                }
-                                            ?>
-                                            
-                                        </th>
-                                        <td><?php echo $mechanic_data['img'] ?></td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a href="edit-employee.php?eid=<?php echo $mechanic_data['id'] ?>" class="btn btn-primary bg-success btn-sm">Edit?</a>
-                                            ||
-                                            <button type="button" data-eid="<?php echo $mechanic_data['id'] ?>" class="btn btn-primary bg-danger btn-sm">Delete?</button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }else{
-                                echo "<tr ><td colspan='10' align='center' >No data found</td></tr>";
-                            }
-                        
-                                ?>
+                                </tbody>
+                            </table>
+                        </div>
 
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
         <!-- employee section ends -->
     </div>

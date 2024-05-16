@@ -28,8 +28,13 @@
             border-right: 0;
         }
 
-        body.d-flex.align-items-center.justify-content-center {
-            background: linear-gradient(76deg, #00000070, #dc3545);
+        body{
+            /* background: linear-gradient(76deg, #00000070, #dc3545); */
+            overflow:hidden;
+            background: linear-gradient(11deg,rgb(0 0 0), rgb(0 0 0 / 10%)), url(../images/banner.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
         }
 
         .form-container {
@@ -40,7 +45,7 @@
 
 <body class="d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="col-3">
-        <h3 class="text-center mb-3"
+        <h3 class="text-center text-light mb-3"
             style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">MRCAR Admin Login
         </h3>
         <div class="form-container">

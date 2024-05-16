@@ -7,27 +7,38 @@
                     </div>
                     <!-- <div class="dashboard-container"> -->
                       <div class="news-form">
-                        <form action="">
+                        <form id="add-post-form" action="" enctype="multipart/form-data">
                             <div class="form-group mt-2 mb-2">
-                                <input type="text" value="Masud" disabled class="form-control">
+                                <input name="author_name" type="text" value="<?php echo $_SESSION['logged_admin_name'] ?>" readonly class="form-control">
                             </div>
                             <div class="form-group mt-2 mb-2">
-                                <input type="text" placeholder="Enter post title" class="form-control">
+                                <input name="post_title" type="text" placeholder="Enter post title" class="form-control">
                             </div>
                             <div class="form-group mb-2">
-                                <textarea name="" class="form-control" id="" cols="15" style="resize: none;" rows="5"></textarea>
+                                <textarea name="post_desc" class="form-control" id="" cols="15" style="resize: none;" rows="5"></textarea>
                             </div>
                             <div class="form-group mb-2">
-                                <select name="" class="form-control" id="">
+                                <select name="post_type" class="form-control" id="">
                                     <option value="" selected disabled>Choose post category</option>
-                                    <option value="">Sales</option>
-                                    <option value="">Promotion</option>
-                                    <option value="">Exchange</option>
+                                    
+                                    <?php 
+                                        $DB->select("post_category","*");  
+                                $all_cat=$DB->getResult();
+                                foreach($all_cat as $cat){
+                                    echo '<option value="'.$cat['id'].'">'.$cat['cat_name'].'</option>';
+                                }
+                                    ?>
                                 </select>
                             </div>
                             <div class="form-group mb-2">
-                                <input type="file" class="form-control">
-                                
+                                <input name="post_img" type="file" class="form-control">
+                            </div>
+                            <div class="form-group mb-2">
+                                <select name="post_publish" id="" class="form-control">
+                                    <option value="" selected disabled>Publish Now?</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
                             </div>
                             <button class="mt-3 btn btn-dark">Add Post?</button>
                        </form>

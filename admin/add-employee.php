@@ -8,11 +8,11 @@
                             <form action="" id="AddEmpForm" enctype="multipart/form-data">
                                 <div class="mt-3 form-group mb-2 w-100">
                                     <label for="" class="mb-2">Employee Name </label>
-                                    <input type="text" name="emp_name" class="form-control mb-2">
+                                    <input placeholder="Enter Employee Name" type="text" name="emp_name" class="form-control mb-2">
                                 </div>
                                 <div class="form-group mb-2 w-100">
                                     <label for="" class="mb-2">Employee E-mail </label>
-                                    <input type="text" name="emp_email" class="form-control mb-2">
+                                    <input placeholder="Enter Employee E-mail" type="email" name="emp_email" class="form-control mb-2">
                                 </div>
                                 <div class="form-group position-relative mb-2" id="phone">
                                     <input placeholder="Enter your phone" name="emp_contact" class="form-control mb-2">

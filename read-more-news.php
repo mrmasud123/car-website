@@ -1,3 +1,11 @@
+<?php
+
+include 'Database/config.inc.php';
+$pid = $_GET['pid'];
+$DB->select("post_category", "*", "news on post_category.id=news.post_type", "news.id=$pid");
+$car_news = $DB->getResult();
+echo explode(".", basename($_SERVER['PHP_SELF']))[0] ." | ". $car_news[0]['cat_name'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +26,7 @@
 
 <body class="position-relative">
     <!-- Scrolltop button starts -->
-    <div id="scroll-top" >
+    <div id="scroll-top">
         <div class="scroll-top-img position-relative">
             <div class="headlight"></div>
             <img class="car-wheel-2" src="images/transparent-wheel.png" alt="">
@@ -30,50 +38,7 @@
 
     <!-- header section starts -->
     <section id="" class="news-header header read-more-news-header">
-        
-        
-        <!---->
-        <div class="container-fluid">
-            <div class="header-top d-flex align-items-center flex-md-row justify-content-center position-relative">
-
-                <div class="header-nav-bar header-left">
-                    <nav class="navbar">
-                        <ul class="d-flex align-items-center justify-content-md-between">
-                            <li class="nav-item"><a href="index.php" class="nav-link text-light">Home</a></li>
-                            <li class="nav-item"><a href="models.php" class="nav-link text-light">Models</a></li>
-                            <li class="nav-item"><a href="news.php" class="nav-link text-light">News</a></li>
-
-                        </ul>
-                    </nav>
-                </div>
-                <div class="header-logo">
-                    <a href="#"><img src="images/car-logo.png" alt="LOGO"></a>
-                </div>
-                <div class="header-nav-bar">
-                    <nav class="navbar">
-                        <ul class="d-flex align-items-center justify-content-md-between">
-                            <li class="nav-item"><a href="purchase.php" class="nav-link text-light">Purchase</a></li>
-                            <li class="nav-item"><a href="about.php" class="nav-link text-light">About</a></li>
-                            <li class="nav-item ">
-                                <button class="btn btn-sm btn-warning" id="user_btn"><i class="fa fa-user"></i></button>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="user-options">
-                    <h3 class="mt-2 mb-4">My Mrcar</h3>
-                    <div class="user-details">
-                        <span class="mt-2 mb-4">Welcome. Here you'll have access to all your Mrcar vehicles or view your future saved vehicles.</span>
-                        <div class="btn-group" class="mt-4">
-                            <a href="login.php" class="btn btn-sm btn-secondary me-2">Login?</a>
-                            <a href="login.php" class="btn btn-sm btn-info">Create account?</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        <?php include 'partials/navbar.inc.php'; ?>
     </section>
     <!-- header section ends -->
 
@@ -82,149 +47,43 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 bg-light">
-                    
-                    <div class="read-more-news-container">
-                       <div class="news-img">
-                        <img src="images/car-6.jpg" alt="CAR IMAGE">
-                       </div>
-                       <div class="news-content text-dark">
-                        <h4>News Heading </h4>
-                            <div class="news">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ipsam sunt provident ratione dolores quos officia, tenetur molestias praesentium, aliquid odit maiores cupiditate earum! Tempora tempore dignissimos libero molestiae voluptates voluptate, obcaecati molestias totam cum eius architecto vero ea debitis natus est, deleniti ex distinctio consectetur autem reprehenderit facilis, ab laborum. Assumenda tempore officia reiciendis aliquam minima harum quasi fugiat, optio ipsam voluptatem dolore esse mollitia sint corporis quod! Laudantium quam enim rerum in, provident doloribus tenetur impedit dicta obcaecati adipisci ad consequatur magnam blanditiis est, saepe non! Debitis, ducimus! Tempore dolorem incidunt culpa nulla inventore est sed impedit. Saepe.</p>
-                                <div class="news-reaction d-flex align-items-center mb-4 mt-2">
-                                    <div class="like me-5 d-flex align-items-center">
-                                        <i class="fa fa-thumbs-up fs-3 me-2"></i>
-                                        <span class="badge bg-success">25</span>
-                                    </div>
-                                    <div class="dislike d-flex align-items-center">
-                                        <i class="fa fa-thumbs-down fs-3 me-2"></i>
-                                        <span class="badge bg-success">25</span>
-                                    </div>
-                                </div>
-                                <div class="news-comment">
-                                    <form action="">
-                                        <div class="form-group">
-                                            <textarea style="resize: none;" name="" id="" cols="10" rows="3" class="form-control"></textarea>
-                                            <label for="" class="text-muted">Leave a comment.....</label>
-                                        </div>
-                                    </form>
-                                    <div class="commentators">
-                                        <div class="card-body p-4">
-                                            <div class="d-flex flex-start">
-                                              <img class="rounded-circle shadow-1-strong me-3"
-                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(33).webp" alt="avatar" width="60"
-                                                height="60" />
-                                              <div>
-                                                <h6 class="fw-bold mb-1">Alexa Bennett</h6>
-                                                <div class="d-flex align-items-center mb-3">
-                                                  <p class="mb-0">
-                                                    March 24, 2021
-                                                    
-                                                  </p>
-                                                  <a href="#!" class="link-muted"><i class="fa fa-pencil-alt ms-2"></i></a>
-                                                  <a href="#!" class="link-muted"><i class="fa fa-redo-alt ms-2"></i></a>
-                                                  <a href="#!" class="link-muted"><i class="fa fa-heart ms-2"></i></a>
-                                                </div>
-                                                <p class="mb-0">
-                                                  There are many variations of passages of Lorem Ipsum available, but the
-                                                  majority have suffered alteration in some form, by injected humour, or
-                                                  randomised words which don't look even slightly believable. If you are
-                                                  going to use a passage of Lorem Ipsum, you need to be sure.
-                                                </p>
-                                              </div>
-                                            </div>
-                                        </div>
-                                        <hr class="my-0" />
+                    <?php
+                    foreach ($car_news as $news) {
+                        ?>
+                        <div class="read-more-news-container">
+                            <div class="news-img">
+                                <img id="news-img" class="rounded" src="images/post_img/<?php echo $news['post_img'] ?>"
+                                    alt="CAR IMAGE">
+                            </div>
+                            <div class="news-content text-dark">
+                                <h4 class='text-capitalize'><?php echo $news['title'] ?></h4>
+                                <div class="news w-100">
+                                    <p><?php echo $news['post_desc'] ?></p>
+                                    <span class="badge bg-success text-capitalize"><?php echo $news['cat_name']; ?></span>
 
-                                        <div class="card-body p-4">
-                                            <div class="d-flex flex-start">
-                                              <img class="rounded-circle shadow-1-strong me-3"
-                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(33).webp" alt="avatar" width="60"
-                                                height="60" />
-                                              <div>
-                                                <h6 class="fw-bold mb-1">Alexa Bennett</h6>
-                                                <div class="d-flex align-items-center mb-3">
-                                                  <p class="mb-0">
-                                                    March 24, 2021
-                                                    
-                                                  </p>
-                                                  <a href="#!" class="link-muted"><i class="fa fa-pencil-alt ms-2"></i></a>
-                                                  <a href="#!" class="link-muted"><i class="fa fa-redo-alt ms-2"></i></a>
-                                                  <a href="#!" class="link-muted"><i class="fa fa-heart ms-2"></i></a>
-                                                </div>
-                                                <p class="mb-0">
-                                                  There are many variations of passages of Lorem Ipsum available, but the
-                                                  majority have suffered alteration in some form, by injected humour, or
-                                                  randomised words which don't look even slightly believable. If you are
-                                                  going to use a passage of Lorem Ipsum, you need to be sure.
-                                                </p>
-                                              </div>
+                                    <div class="news-comment mt-3">
+                                        <form id="commentForm" action="">
+                                            <div class="form-group">
+                                                <textarea name="comment_txt" style="resize: none;" name="" id="" cols="10" rows="3"
+                                                class="form-control"></textarea>
+                                                <label for="" class="text-muted">Leave a comment.....</label>
+                                                <input hidden name="post_id" type="text" readonly value="<?php echo $pid; ?>" class="pid form-control">
+                                                <input hidden type="text" readonly value="<?php echo basename($_SERVER['PHP_SELF']) ?>" class="page_url form-control">
                                             </div>
+                                            <button class="btn btn-sm btn-warning" type="submit">Comment?</button>
+                                        </form>
+                                        <div class="commentators">
                                         </div>
-                                        <hr class="my-0" />
                                     </div>
                                 </div>
                             </div>
-                       </div>
-                    </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </section>
     <!-- news section ends -->
-    
-    <!-- Footer section starts -->
-    <section id="footer" class="mt-5 mb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="col-3">
-                        <div class="logo mb-3">
-                            <img class="w-100" src="images/car-logo.png" alt="">
-                        </div>
-                        <span>We are determined to cherish your dream car.</span>
-                    </div>
-                    <div class="col-3">
-                        <h3>Company</h3>
-                        <nav class="nav">
-                            <ul>
-                                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Cars</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Showrooms</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-3">
-                        <h3>Information</h3>
-                        <nav class="nav">
-                            <ul>
-                                <li class="nav-item"><a class="nav-link" href="#">Request a test drive?</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Contact us</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-3">
-                        <h3>Follow us</h3>
-                        <div class="w-50 social__links d-flex align-items-center justify-content-between">
-                            <a href="#" class="nav-link"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="nav-link"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="nav-link"><i class="fa fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer section ends -->
 
-    <!-- JS files -->
-    <script src="js/jquery.min.js"></script>
-    <!-- <script src="js/owl.carousel.min.js"></script> -->
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/actions.js"></script>
-</body>
 
-</html>
-</html>
+    <?php include 'partials/footer.inc.php'; ?>

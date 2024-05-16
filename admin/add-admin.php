@@ -8,30 +8,32 @@
 
                     <div class="mt-5 dashboard-container d-flex align-items-center justify-content-center flex-column w-75">
                         <div class="form-container w-100">
-                            <form action="">
+                            <form action="" id="add_admin_form">
                                 <div class="form-group mb-2 w-100">
                                 
-                                    <input type="text" name="car_name" placeholder="Enter Admin Name" class="form-control mb-2">
-                                </div>
+                                    <input type="text" name="admin_name" placeholder="Enter Admin Name" class="form-control mb-2 mt-2">
+                                </div> 
                                 <div class="form-group mb-2 w-100">
                                     
-                                    <input type="text" name="car_name" placeholder="Enter Admin E-mail"  class="form-control mb-2">
+                                    <input type="email" name="admin_email" placeholder="Enter Admin E-mail"  class="form-control mb-2">
                                 </div>
                                 <div class="form-group mb-2 w-100">
                                 
-                                    <input type="text" placeholder="Enter Admin Password"  name="car_name" class="form-control mb-2">
+                                    <input type="text" placeholder="Enter Admin Password" id="password" name="admin_password" class="form-control mb-2">
+                                    <input type="checkbox" checked id="showPassword" class="toggle-checkbox">
+                                    <label class="text-light" for="showPassword">Show Password</label>
                                 </div>
                                 
                                 <div class="form-group mb-2 w-100">
-                                    <label for="" class="mb-2">Admin Account Status</label>
-                                    <select name="" id="" class="form-control">
+                                    <label for="" name="" class="text-light mb-2">Admin Account Status</label>
+                                    <select name="acc_status" id="" class="form-control">
                                         <option value="" selected disabled>Choose status</option>
-                                        <option value="">Active</option>
-                                        <option value="">Deactivate</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactivate</option>
                                     </select>
                                 </div>
                                 
-                                <button class="btn btn-primary">Add?</button>
+                                <button type="submit" class="btn btn-primary">Add?</button>
                             </form>
                         </div>
                     </div>
